@@ -13,7 +13,7 @@ const userSchema = new Schema({
   password: {type: String},
   todos: [
     {
-      tesxt: {type: String}
+      text: {type: String}
     }
   ]
 });
@@ -26,10 +26,10 @@ userSchema.pre('save', next => {
 });
 
 const User = mongoose.model('user', userSchema);
-const email = 'test1@test.com';
-const user = new User({
-  email
-});
+const email = 'test@test.com';
+// const user = new User({
+//   email
+// });
 
 const saveCb = err => {
   if (err) {
@@ -55,4 +55,5 @@ User.findOne({email}, (err, user) => {
 
   user.save(saveCb);
 });
+
 
