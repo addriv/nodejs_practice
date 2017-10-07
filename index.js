@@ -42,18 +42,29 @@ const saveCb = err => {
 
 // user.save(saveCb);
 
-const text = 'This is a todo';
+// const text = 'This is a todo';
 
-User.findOne({email}, (err, user) => {
+// User.findOne({email}, (err, user) => {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   if (!user) {
+//     console.log("Couldn't find user.");
+//   }
+//   const count = user.todos.push({text});
+
+//   user.save(saveCb);
+// });
+
+const id = '59d9602d6278b447e86534d0';
+
+User.update({email}, {$pull: {todos: {_id: id}}}, err => {
   if (err) {
     return console.log(err);
+  } else {
+    return console.log('Removed that todo!');
   }
-  if (!user) {
-    console.log("Couldn't find user.");
-  }
-  const count = user.todos.push({text});
-
-  user.save(saveCb);
 });
+
 
 

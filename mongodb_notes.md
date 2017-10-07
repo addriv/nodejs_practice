@@ -17,6 +17,7 @@
   * user.save(cb);
 5. Can add a 'pre' function that runs before save
   * userSchema.pre(cb);
-6. To find a record and update
-  * User.findOne({email}, (err, user) => {fn})
-
+6. To find records and update
+  * User.findOne({email}, (err, user) => {})
+7. To delete 
+  * User.update({email}, {$pull: {todos: {_id: id}}}, callback)
