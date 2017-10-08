@@ -1,7 +1,15 @@
-import { createStore, applyMiddleware } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {AsyncStorage} from 'react-native';
+import {persistStore, autoRehydrate} from 'redux-persist';
 import logger from 'redux-logger';
 import todosReducer from '../reducers/todos_reducer';
 
-export const configureStore = (initialState) => (
-  createStore(todosReducer, initialState, applyMiddleware(logger))
-);
+// const composeFn = 
+
+export const configureStore = (initialState) => { 
+  const store = createStore(todosReducer, initialState,  compose(applyMiddleware(logger), autoRehydrate()));
+  persistStore(store, {storage: AsyncStorage});
+  return store;
+};
+    
+    
