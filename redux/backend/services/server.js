@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 const router = require('./router');
 
-mongoose.connect('mongodb://localhost:todoList/todoList');
+mongoose.connect('mongodb://localhost:redux/redux');
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());

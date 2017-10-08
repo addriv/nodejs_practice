@@ -1,4 +1,4 @@
-const AuthenticationController = require('../controllers/users_controller');
+const UsersController = require('../controllers/users_controller');
 
 const router = require('express').Router();
 
@@ -10,6 +10,6 @@ router.route('/protected')
   .get(protectedRoute);
 
 router.route('/signup')
-  .post(AuthenticationController.signup);
+  .post(UsersController.signup);
   
-export default router;
+module.exports =  router;

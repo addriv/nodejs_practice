@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 
 const validateEmail = email => {
-  return (/\S+@S+\.\S+/).test(email);
+  return (/\S+@\S+\.\S+/).test(email);
 };
 
 const userSchema = new Schema({
@@ -11,7 +11,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     lowercase: true,
-    required: 'Email address is requird',
+    required: 'Email address is required',
     validate: [validateEmail, 'Please enter a valid email']
   },
   password: {
@@ -19,9 +19,9 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.pre('save', next => {
+userSchema.pre('save', function(next) {
   const user = this;
-  if (user.isNew || user.isModified('paswword')){
+  if (user.isNew || user.isModified('password')){
     bcrypt.genSalt(10, (error, salt) => {
       if (error) {return next(error);}
       bcrypt.hash(user.password, salt, null, (error2, hash) => {
@@ -33,4 +33,4 @@ userSchema.pre('save', next => {
   }
 });
 
-export default mongoose.model('user', userSchema);
+module.exports = mongoose.model('user', userSchema);
