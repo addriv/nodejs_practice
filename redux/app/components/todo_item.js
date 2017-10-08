@@ -13,7 +13,6 @@ class TodoItem extends Component {
     this.deleteSelf = this.deleteSelf.bind(this);
   }
   deleteSelf(){
-    console.log(this.props);
     this.props.removeTodo(this.props.id);
   }
 

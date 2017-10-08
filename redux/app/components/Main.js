@@ -17,6 +17,8 @@ class Main extends Component {
     this.state = {
       newTodoText: ''
     };
+    this.addNewTodo = this.addNewTodo.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   addNewTodo(){
@@ -29,12 +31,16 @@ class Main extends Component {
     this.props.createTodo(newTodoText);
   }
 
+  handleInput(event){
+    this.setState({newTodoText: event.nativeEvent.text});
+  }
+
   render() {
 
     const renderTodos =() => {
-      return temporaryTodos.map((todo, i) => {
+      return this.props.todos.map((todo, i) => {
         return (      
-          <TodoItemContainer key={i} text={todo.text} id={i}/>
+          <TodoItemContainer key={i} text={todo.text} id={todo.id}/>
         );
       });
     };
@@ -48,7 +54,12 @@ class Main extends Component {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input}></TextInput>
+          <TextInput 
+            value={this.state.newTodoText}
+            onChange={this.handleInput}
+            returnKeyType="done"
+            onSubmitEditing={this.addNewTodo}
+            style={styles.input}></TextInput>
         </View>
         <ScrollView
           automaticallyAdjustContentInsets={false}>
