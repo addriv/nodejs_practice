@@ -1,5 +1,8 @@
 const UsersController = require('../controllers/users_controller');
+const passport = require('passport');
+const passportService = require('./passport');
 
+const requireAuth = passport.authenticate('jwt', {session: false});
 const router = require('express').Router();
 
 const protectedRoute = (req, res, next) => {
@@ -7,9 +10,12 @@ const protectedRoute = (req, res, next) => {
 };
 
 router.route('/protected')
-  .get(protectedRoute);
+  .get(requireAuth, protectedRoute);
 
 router.route('/signup')
   .post(UsersController.signup);
+
+router.route('/signin')
+  .post(UsersController.signin);
   
 module.exports =  router;

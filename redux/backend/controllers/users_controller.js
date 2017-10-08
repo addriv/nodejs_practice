@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jwt-simple');
-const config = require('../services/config.js');
+const config = require('../services/config');
 
 console.log(config);
 console.log(config.secret);
@@ -36,4 +36,9 @@ exports.signup = (req, res, next) => {
     });
   }); 
 
+};
+
+exports.signin = (req, res, next) => {
+  const user = req.user;
+  res.send({token: tokenForUser(user), user_id: user._id});
 };
