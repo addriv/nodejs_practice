@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import {configureStore} from './app/store/store';
-import MainContainer from './app/components/main_container'
+import MainContainer from './app/components/main_container';
 
 export default class App extends Component {
   render() {
