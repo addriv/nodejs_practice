@@ -6,17 +6,18 @@ const requireAuth = passport.authenticate('jwt', {session: false});
 const requireSignin = passport.authenticate('local', {session: false});
 const router = require('express').Router();
 
-const protectedRoute = (req, res, next) => {
-  res.send("Here's the secret!");
-};
-
-router.route('/protected')
-  .get(requireAuth, protectedRoute);
-
+// Auth Routes
+// ---------------------------------------------------------------------
 router.route('/signup')
-  .post(UsersController.signup);
+.post(UsersController.signup);
 
 router.route('/signin')
-  .post([requireSignin, UsersController.signin]);
-  
+.post([requireSignin, UsersController.signin]);
+
+// xxx Routes
+// ---------------------------------------------------------------------
+
+// router.route('/protected')
+//   .get(requireAuth, protectedRoute);
+
 module.exports =  router;
